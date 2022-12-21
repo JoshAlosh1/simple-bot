@@ -55,7 +55,7 @@ const ChatBox = () => {
     setMessages( prev => [ ...prev, { type, text }] );
 
     if (type === 'user') {
-      parseInput(text);
+      parseInput(text.toLowerCase());
     }
 
     scrollDown(500);
