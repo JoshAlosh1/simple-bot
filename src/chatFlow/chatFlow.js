@@ -8,8 +8,8 @@ export const Flow = {
   loading: ["Loading some data for you..."],
   weather: ["Seems you are looking for the weather forecast", "For which city do you need the info?"],
   choseCity: ["Here is some cities that matches your input:", "(Please type the corresponding number to chose the right location)", " * You can type 'exit' to continue to regular conversation."],
-  noCity: ["No options found that matches your location input:", "type a location for new location, or type 'exit' to continue to regular conversation."],
-  end: ["O.K, seems we've got to the end...", "it was very nice to chat.", "See you!"]
+  noCity: ["No options found that matches your location input:", "Type a location for new location, or type 'exit' to continue to regular conversation."],
+  end: ["Seems we've got to the end :( ", "It was very nice to chat.", "See you!"]
 }
 
 export let ActiveMode = 'chat';
@@ -30,7 +30,7 @@ export function updateChosenCity(value) {
 export const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 export const weatherBaseUrl = 'https://dataservice.accuweather.com/';
-export const weatherKey = '?apikey=hMDNS0V0XlPmv0uL0oBs9DuRHA9Lspe6';
+export const weatherKey = '?apikey=hXUwroSoLsNYusB47tLETxNfYXNtt9JZ';
 
 export const getCitiesAutocompleteUrl = (searchKey) => {
   if (!searchKey) {  return;  }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { Flow } from '../chatFlow/chatFlow'
 import { useGenerateBotResponses } from '../chatFlow/useFlow'
 import ChatArea from './ChatArea'
@@ -13,6 +13,20 @@ const ChatBox = () => {
   const bottomRef = useRef();
   const mounted = useRef(false);
 
+  const addBotMessage = useCallback(
+    (textArray = [], type = 'bot') => {
+        if (textArray.length) {
+          setMessages( prev => prev.filter( item => item.type !== 'loading' ) );
+    
+          textArray.forEach( text => {
+            setMessages(prev =>  [...prev, {type, text}])
+          })
+    
+          scrollDown(800);
+        }
+    }, [],
+  )
+
   useEffect(() => {
     if (mounted.current) {
       return;
@@ -21,7 +35,7 @@ const ChatBox = () => {
     setTimeout(() => {
       addBotMessage(Flow.start)
     }, 800);
-  }, [])
+  }, [addBotMessage])
 
   useEffect(() => {
     if (!botResponse) {
@@ -32,17 +46,7 @@ const ChatBox = () => {
     if (botResponse.type === 'end') {
       setChatIsActive(false);
     }
-  }, [botResponse])
-  
-  function addBotMessage(textArray = [], type = 'bot') {
-    if (textArray.length) {
-      setMessages( prev => prev.filter( item => item.type !== 'loading' ) );
-
-      textArray.forEach( text => {
-        setMessages(prev =>  [...prev, {type, text}])
-      })
-    }
-  }
+  }, [botResponse, addBotMessage])
   
   function addMessage( type, text ) {
     if (text.startsWith('_')) {
@@ -54,9 +58,13 @@ const ChatBox = () => {
       parseInput(text);
     }
 
+    scrollDown(500);
+  }
+
+  function scrollDown(time) {
     setTimeout(() => {
       bottomRef.current?.scrollIntoView({behavior: 'smooth'});
-    }, 500);
+    }, time);
   }
 
   return (

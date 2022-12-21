@@ -101,6 +101,7 @@ code {
 
 .send-wrapper button {
   width: 20%;
+  cursor: pointer;
 }
 
 .message-item {

@@ -6,6 +6,9 @@ const SendArea = ({ chatIsActive, addMessage }) => {
   const [text, setText] = useState();
   
   function sendMessage() {
+    if (text === '') {
+      return;
+    }
     addMessage('user', text);
     setText('');
   }
