@@ -15,7 +15,6 @@ export const useFetch = () => {
     // Function for triggering useEffect by changing state (activating the fetch):
     const fetchData = useCallback(
         (fetchDetail, fetchedUrl, fetchedMethod = "GET", fetchedData = null) => {
-            console.log('fetchData: ', fetchedUrl, fetchDetail)
             setLocalDetail?.(fetchDetail);
             setUrl(fetchedUrl);
             setMethod(fetchedMethod);

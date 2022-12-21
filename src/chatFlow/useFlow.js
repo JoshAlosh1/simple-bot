@@ -3,13 +3,12 @@ import * as flowHelpers from './chatFlow';
 import { useFetch } from './useFetch';
 
 export const useGenerateBotResponses = () => {
-    const [botResponse, setBotResponse] = useState({data: null, loading: false, error: null});
+    const [botResponse, setBotResponse] = useState();
     const { fetchedResponse, fetchData } = useFetch();
     
     const parseInput = useCallback(
         (text) => {
-            console.log("parseInput", text)
-            console.log('flowHelpers.ActiveMode', flowHelpers.ActiveMode)
+         
             if (flowHelpers.ActiveMode === 'end') {
                 return;
             }
@@ -67,7 +66,7 @@ export const useGenerateBotResponses = () => {
             if (!response) {
                 return;
             }
-            console.log('fetched response', response)
+
            if (response.error) {
                 let textArray = flowHelpers.Flow.error;
                 setBotResponse( {textArray, type: 'bot'} );
@@ -103,7 +102,6 @@ export const useGenerateBotResponses = () => {
                     return;
                 }
             }
-
         },
         [],
     )

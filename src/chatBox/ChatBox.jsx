@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Flow, generateBotResponses } from '../chatFlow/chatFlow'
+import { Flow } from '../chatFlow/chatFlow'
 import { useGenerateBotResponses } from '../chatFlow/useFlow'
 import ChatArea from './ChatArea'
 import HeaderArea from './HeaderArea'
@@ -13,8 +13,6 @@ const ChatBox = () => {
   const bottomRef = useRef();
   const mounted = useRef(false);
 
-  console.log('messages', messages)
-
   useEffect(() => {
     if (mounted.current) {
       return;
@@ -26,6 +24,9 @@ const ChatBox = () => {
   }, [])
 
   useEffect(() => {
+    if (!botResponse) {
+      return;
+    }
     addBotMessage(botResponse.textArray, botResponse.type);
 
     if (botResponse.type === 'end') {
